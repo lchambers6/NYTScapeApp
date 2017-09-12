@@ -34,7 +34,7 @@ app.get('/', function (req, res) {
   });
 });
 
-mongoose.connect("mongodb://localhost/week18day3mongoose");
+mongoose.connect("mongodb://heroku_43wmb6j6:lodc71tredmmeb5ccndolmjbpp@ds129434.mlab.com:29434/heroku_43wmb6j6");
 var db = mongoose.connection;
 
 db.on("error", function (error) {
