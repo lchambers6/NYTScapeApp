@@ -2,6 +2,10 @@
     color: #f46242;
 }
 
-.fa-sticky-note{
+.fa-sticky-note {
     color: #338DFF;
+}
+
+.deleteNote{
+    margin: 5px;
 }

@@ -4,7 +4,7 @@ $( document ).ready(function() {
     $.ajax({
       method: "POST",
       url: "/saved/" + thisId
-    }).done(window.location.replace("/"));
+    }).done(window.location.reload());
   });
   
   $(".deleteSaved").click(function() {
@@ -12,14 +12,22 @@ $( document ).ready(function() {
     $.ajax({
       method: "POST",
       url: "/saved/" + thisId + "/delete"
-    }).done(window.location.replace("/"));
+    }).done(window.location.reload());
   });
-  
-  $(".addNote").click(function() {
+   
+  $(".viewNotes").click(function() {
+    var thisId = $(this).attr("data-id");
+    $.ajax({
+      method: "GET",
+      url: "/articles/" + thisId
+    }).done(window.location.replace("/articles/" + thisId));
+  });
+
+  $(".deleteNote").click(function() {
     var thisId = $(this).attr("data-id");
     $.ajax({
       method: "POST",
-      url: "/articles/" + thisId
-    }).done(window.location.replace("/"));
+      url: "/notes/" + thisId + "/delete"
+    }).done(window.location.reload());
   });
 });

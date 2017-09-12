@@ -90,17 +90,6 @@ app.get("/clear", function (req, res) {
   res.redirect("/");
 });
 
-app.get("/articles", function (req, res) {
-  Article.find({}, function (err, data) {
-    if (err) {
-      console.log(err);
-    }
-    else {
-      res.json(data);
-    }
-  });
-});
-
 app.get('/saved', function (req, res) {
   Article.find({ saved: true }, function (err, data) {
     if (err) {
@@ -125,11 +114,22 @@ app.post("/saved/:id", function (req, res) {
 app.post("/saved/:id/delete", function (req, res) {
   Article.update({ _id: req.params.id }, { $set: { saved: false } }, function (err, row) {
     if (err) {
-      console.log("Article couldn't be saved" + err);
+      console.log("Article couldn't be deleted" + err);
       return;
     }
-    console.log("Article saved");
+    console.log("Article deleted");
   })
+});
+
+app.get("/articles", function (req, res) {
+  Article.find({}, function (err, data) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.json(data);
+    }
+  });
 });
 
 app.get("/articles/:id", function (req, res) {
@@ -140,15 +140,15 @@ app.get("/articles/:id", function (req, res) {
         res.send(error);
       }
       else {
-        res.render('saved', { Article: doc });
+        res.render('articles', { Article: doc });
       }
     });
 });
 
 app.post("/articles/:id", function (req, res) {
+  console.log(req.body);
   var newNote = new Note(req.body);
   newNote.save(function (error, doc) {
-    console.log(doc);
     if (error) {
       res.send(error);
     }
@@ -163,6 +163,16 @@ app.post("/articles/:id", function (req, res) {
       });
     }
   });
+});
+
+app.post("/notes/:id/delete", function (req, res) {
+  Note.remove({ _id: req.params.id }, function (err, row) {
+    if (err) {
+      console.log("Note couldn't be deleted" + err);
+      return;
+    }
+    console.log("Note deleted");
+  })
 });
 
 app.listen(3000, function () {
