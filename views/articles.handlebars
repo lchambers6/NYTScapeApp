@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+        {{#each Article}}
+            <div class="article-title" data-id={{this._id}}>
+                <h2>{{this.title}}</h2>
+            </div>
+            <div>
+                {{#if this.saved}}
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
+                {{/if}}
+                {{#if this.notes}}
+                <i class="fa fa-sticky-note" aria-hidden="true"></i>
+                {{/if}}
+            </div>
+            <form action="/articles/{{this._id}}" method="post">
+                <div>
+                    <textarea type="text" name="body" placeholder="Write Note Here..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-warning addNote" data-id={{this._id}}>Add Note</button>
+                <a href="{{this.link}}" class="btn btn-success">View Article</a>
+                <a class="btn btn-primary saveArticle" data-id={{this._id}}>Save Article</a>
+                    <a class="btn btn-danger deleteSaved" data-id={{this._id}}>Delete Saved Article</a>
+                {{#if this.notes}}
+                    <a class="btn btn-info deleteSaved" data-id={{this._id}}>View Notes</a>
+                {{/if}}
+            </form>
+            <p>{{this.notes}}</p>
+            {{#each this.notes}}
+                <p>{{this.body}}</p>
+                <a class="btn btn-danger deleteNote" data-id={{this._id}}>X</a>
+            {{/each}}        
+        {{/each}}
+    </div>
+</div>
