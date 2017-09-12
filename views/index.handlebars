@@ -14,13 +14,15 @@
                 {{/if}}
             </div>
             <div class="article-link">
-                <form action="/articles/{{this._id}}" method="post">
+                <form action="/articles/{{this._id}}" method="post" id="notesForm">
                     <div>
-                        <textarea type="text" name="body" placeholder="Write Note Here..."></textarea>
+                        <textarea type="text" name="body" placeholder="Write Note Here..." required id="newNote"></textarea>
                     </div>
                     <button type="submit" class="btn btn-warning addNote" data-id={{this._id}}>Add Note</button>
                     <a href="{{this.link}}" target="_blank" class="btn btn-success">View Article</a>
-                    <a class="btn btn-primary saveArticle" data-id={{this._id}}>Save Article</a>
+                    {{#unless this.saved}}
+                        <a class="btn btn-primary saveArticle" data-id={{this._id}}>Save Article</a>
+                    {{/unless}}
                     {{#if this.saved}}
                         <a class="btn btn-danger deleteSaved" data-id={{this._id}}>Delete Saved Article</a>
                     {{/if}}

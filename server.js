@@ -146,7 +146,6 @@ app.get("/articles/:id", function (req, res) {
 });
 
 app.post("/articles/:id", function (req, res) {
-  console.log(req.body);
   var newNote = new Note(req.body);
   newNote.save(function (error, doc) {
     if (error) {
