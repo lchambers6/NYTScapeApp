@@ -36,7 +36,7 @@ app.get('/', function (req, res) {
   });
 });
 
-mongoose.connect("mongodb://heroku_43wmb6j6:lodc71tredmmeb5ccndolmjbpp@ds129434.mlab.com:29434/heroku_43wmb6j6",{
+mongoose.connect("mongodb://localhost/week18Populater",{
   useMongoClient: true,
 });
 var db = mongoose.connection;

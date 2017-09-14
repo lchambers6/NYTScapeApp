@@ -1,5 +1,6 @@
 $(document).ready(function () {
-  $(".saveArticle").click(function () {
+  $(".saveArticle").click(function (event) {
+    event.preventDefault();
     var thisId = $(this).attr("data-id");
     $.ajax({
       method: "POST",
@@ -7,7 +8,8 @@ $(document).ready(function () {
     }).done(window.location.reload());
   });
 
-  $(".deleteSaved").click(function () {
+  $(".deleteSaved").click(function (event) {
+    event.preventDefault();
     var thisId = $(this).attr("data-id");
     $.ajax({
       method: "POST",
@@ -15,7 +17,8 @@ $(document).ready(function () {
     }).done(window.location.reload());
   });
 
-  $(".viewNotes").click(function () {
+  $(".viewNotes").click(function (event) {
+    event.preventDefault();
     var thisId = $(this).attr("data-id");
     $.ajax({
       method: "GET",
@@ -23,7 +26,8 @@ $(document).ready(function () {
     }).done(window.location.replace("/articles/" + thisId));
   });
 
-  $(".deleteNote").click(function () {
+  $(".deleteNote").click(function (event) {
+    event.preventDefault();
     var thisId = $(this).attr("data-id");
     $.ajax({
       method: "POST",
