@@ -9,6 +9,8 @@ var cheerio = require("cheerio");
 // Set mongoose to leverage built in JavaScript ES6 Promises
 mongoose.Promise = Promise;
 
+var PORT = process.env.PORT || 3000;
+
 var exphbs = require('express-handlebars');
 var app = express();
 
@@ -176,6 +178,8 @@ app.post("/notes/:id/delete", function (req, res) {
   })
 });
 
-app.listen(3000, function () {
-  console.log("App running on port 3000!");
+db.sequelize.sync({ force: true }).then(function() {
+  app.listen(PORT, function() {
+    console.log("App listening on PORT " + PORT);
+  });
 });
